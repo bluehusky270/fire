@@ -14,8 +14,8 @@ public class gamemanage3 : MonoBehaviour
     private Dictionary<GameObject, GameObject>arrows=new Dictionary<GameObject, GameObject>();
     private int clearedfires = 0;
     public Transform vrcamera;
-    private Vector3 buttonoffset = new Vector3(0, -0.5f, 5f);
-    private Vector3 paneloffset = new Vector3(0, 0, 10f);
+    private Vector3 buttonoffset = new Vector3(0, -0.5f, 10f);
+    private Vector3 paneloffset = new Vector3(0, 0, 30f);
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +55,7 @@ public class gamemanage3 : MonoBehaviour
     {
         foreach (GameObject firepoint in firepoints)
         {
-            if(firepoint!=null&&Vector3.Distance(player.transform.position,firepoint.transform.position)<50f)
+            if(firepoint!=null&&Vector3.Distance(player.transform.position,firepoint.transform.position)<70f)
             {
                 waterbutton.SetActive(true);
                 waterbutton.GetComponent<Button>().onClick.RemoveAllListeners();
