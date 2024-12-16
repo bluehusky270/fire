@@ -15,7 +15,7 @@ public class gamemanage3 : MonoBehaviour
     private int clearedfires = 0;
     public Transform vrcamera;
     private Vector3 buttonoffset = new Vector3(0, -0.5f, 10f);
-    private Vector3 paneloffset = new Vector3(0, 0, 30f);
+    private Vector3 paneloffset = new Vector3(0, 0, 35f);
     // Start is called before the first frame update
     void Start()
     {
