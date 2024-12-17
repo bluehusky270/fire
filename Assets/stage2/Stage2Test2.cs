@@ -12,6 +12,7 @@ public class Stage2Test2 : MonoBehaviour
     public AudioClip splashSound;  // 첨벙 소리
     private AudioSource audioSource;  // 오디오 소스
     private bool near = false;
+    private bool isBambiBucketCreated = false;  // 물주머니가 이미 생성되었는지 확인하는 변수
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +43,10 @@ public class Stage2Test2 : MonoBehaviour
                     can.gameObject.SetActive(true);
                 }
 
-                if (IsButtonTwoPressed())
+                if (IsButtonTwoPressed() && !isBambiBucketCreated)  // 물주머니가 아직 생성되지 않았으면
                 {
-
                     TriggerBambiBucketCreation();
+                    isBambiBucketCreated = true;  // 물주머니가 생성되었음을 표시
                 }
             }
             else
@@ -81,15 +82,13 @@ public class Stage2Test2 : MonoBehaviour
         GameObject bambiBucket = Instantiate(BambiBucketPrefab, pool.transform.position, Quaternion.identity);
 
         // 생성된 물주머니의 위치를 새로 설정
-        bambiBucket.transform.position = new Vector3(0, 5.8f, 3);
+        bambiBucket.transform.position = new Vector3(0, 5.8f, 2);
 
         // 첨벙 소리 재생
         if (audioSource != null && splashSound != null)
         {
-            Debug.Log("dd");
             audioSource.PlayOneShot(splashSound);
         }
-
 
         // 소리가 끝난 후 씬 전환
         Invoke("LoadNextScene", splashSound.length + 0);  // 소리 길이만큼 기다린 후 씬 전환
