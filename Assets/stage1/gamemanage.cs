@@ -10,7 +10,6 @@ public class gamemanage : MonoBehaviour
 {
     public GameObject player;
     public GameObject heli;
-    public Canvas can;
     public Button bt;
     private bool near = false;
     // Start is called before the first frame update
@@ -18,9 +17,7 @@ public class gamemanage : MonoBehaviour
     {
         player = GameObject.Find("CenterEyeAnchor");
         heli = GameObject.Find("Helicopter");
-        if (player == null) Debug.LogError("Player (CenterEyeAnchor) not found!");
-        if (heli == null) Debug.LogError("Helicopter not found!");
-        can.gameObject.SetActive(false);
+        bt.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,7 +31,7 @@ public class gamemanage : MonoBehaviour
                 if (!near)
                 {
                     near = true;
-                    can.gameObject.SetActive(true);
+                    bt.gameObject.SetActive(true);
                 }
                 if (IsButtonOnePressed())
                 {
@@ -46,7 +43,7 @@ public class gamemanage : MonoBehaviour
                 if (near)
                 {
                     near = false;
-                    can.gameObject.SetActive(false);
+                    bt.gameObject.SetActive(false);
                 }
             }
         }
