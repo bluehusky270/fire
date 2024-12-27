@@ -7,7 +7,8 @@ public class Stage2Test2 : MonoBehaviour
 {
     public GameObject player;
     public GameObject pool;
-    public Canvas can;
+    public GameObject bt;
+    public GameObject op;
     public GameObject BambiBucketPrefab;  // 물주머니 프리팹
     public AudioClip splashSound;  // 첨벙 소리
     private AudioSource audioSource;  // 오디오 소스
@@ -23,7 +24,8 @@ public class Stage2Test2 : MonoBehaviour
         if (player == null) Debug.LogError("Player (Helicopter) not found!");
         if (pool == null) Debug.LogError("Pool not found!");
 
-        can.gameObject.SetActive(false);
+        bt.gameObject.SetActive(false);
+        op.gameObject.SetActive(false);
 
         // 오디오 소스
         audioSource = GetComponent<AudioSource>();
@@ -32,6 +34,10 @@ public class Stage2Test2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.Get(OVRInput.Button.Two, OVRInput.Controller.LTouch))
+        {
+            op.gameObject.SetActive(true);
+        }
         if (player != null && pool != null)
         {
             float dis = Vector3.Distance(player.transform.position, pool.transform.position);
@@ -40,7 +46,7 @@ public class Stage2Test2 : MonoBehaviour
                 if (!near)
                 {
                     near = true;
-                    can.gameObject.SetActive(true);
+                    bt.gameObject.SetActive(true);
                 }
 
                 if (IsButtonTwoPressed() && !isBambiBucketCreated)  // 물주머니가 아직 생성되지 않았으면
@@ -54,7 +60,7 @@ public class Stage2Test2 : MonoBehaviour
                 if (near)
                 {
                     near = false;
-                    can.gameObject.SetActive(false);
+                    bt.gameObject.SetActive(false);
                 }
             }
         }

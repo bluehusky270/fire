@@ -1,9 +1,10 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class choice : MonoBehaviour
+public class choice1 : MonoBehaviour
 {
     LineRenderer lr;
     GameObject rh;

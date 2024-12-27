@@ -10,21 +10,25 @@ public class gamemanage2 : MonoBehaviour
 {
     public GameObject player;
     public GameObject pool;
-    public Canvas can;
+    public GameObject bt;
+    public GameObject op;
     private bool near = false;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Helicopter");
         pool = GameObject.Find("Pool");
-        if (player == null) Debug.LogError("Player (CenterEyeAnchor) not found!");
-        if (pool == null) Debug.LogError("pool not found!");
-        can.gameObject.SetActive(false);
+        bt.gameObject.SetActive(false);
+        op.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.Get(OVRInput.Button.Two, OVRInput.Controller.RTouch))
+        {
+            op.gameObject.SetActive(true);
+        }
         if (player != null && pool != null)
         {
             float dis = Vector3.Distance(player.transform.position, pool.transform.position);
@@ -33,7 +37,7 @@ public class gamemanage2 : MonoBehaviour
                 if (!near)
                 {
                     near = true;
-                    can.gameObject.SetActive(true);
+                    bt.gameObject.SetActive(true);
                 }
                 if (IsButtonTwoPressed())
                 {
@@ -45,7 +49,7 @@ public class gamemanage2 : MonoBehaviour
                 if (near)
                 {
                     near = false;
-                    can.gameObject.SetActive(false);
+                    bt.gameObject.SetActive(false);
                 }
             }
         }

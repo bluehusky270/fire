@@ -11,6 +11,7 @@ public class gamemanage : MonoBehaviour
     public GameObject player;
     public GameObject heli;
     public Button bt;
+    public GameObject op;
     private bool near = false;
     // Start is called before the first frame update
     void Start()
@@ -18,11 +19,16 @@ public class gamemanage : MonoBehaviour
         player = GameObject.Find("CenterEyeAnchor");
         heli = GameObject.Find("Helicopter");
         bt.gameObject.SetActive(false);
+        op.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(OVRInput.Get(OVRInput.Button.Two, OVRInput.Controller.LTouch))
+        {
+            op.gameObject.SetActive(true);
+        }
         if (player != null && heli != null)
         {
             float dis = Vector3.Distance(player.transform.position, heli.transform.position);

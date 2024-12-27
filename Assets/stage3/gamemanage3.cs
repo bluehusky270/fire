@@ -10,11 +10,13 @@ public class gamemanage3 : MonoBehaviour
     public GameObject waterbutton;
     public GameObject clearscreen;
     public GameObject ap;
+    public GameObject op;
+    public GameObject guide;
     public List<GameObject> firepoints;
     private Dictionary<GameObject, GameObject>arrows=new Dictionary<GameObject, GameObject>();
     private int clearedfires = 0;
     public Transform vrcamera;
-    private Vector3 buttonoffset = new Vector3(0, -0.5f, 10f);
+    private Vector3 buttonoffset = new Vector3(0, -0.5f, 2);
     private Vector3 paneloffset = new Vector3(0, 0, 35f);
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,8 @@ public class gamemanage3 : MonoBehaviour
         player = GameObject.Find("Helicopter");
         waterbutton.SetActive(false);
         clearscreen.SetActive(false);
-        if(vrcamera==null)
+        op.gameObject.SetActive(false);
+        if (vrcamera==null)
         {
             vrcamera = Camera.main.transform;
         }
@@ -41,6 +44,10 @@ public class gamemanage3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.Get(OVRInput.Button.Two, OVRInput.Controller.LTouch))
+        {
+            op.gameObject.SetActive(true);
+        }
         checkfirepoints();
         if(waterbutton.activeSelf)
         {
@@ -83,6 +90,7 @@ public class gamemanage3 : MonoBehaviour
             waterbutton.SetActive(false);
             if (clearedfires == firepoints.Count)
             {
+                Destroy(guide);
                 clearscreen.SetActive(true);
             }
         }

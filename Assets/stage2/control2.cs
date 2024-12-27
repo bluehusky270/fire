@@ -7,7 +7,9 @@ public class control2 : MonoBehaviour
     Vector3 mv = Vector3.zero;
     float fr;
     float lr;
-    float speed = 5;
+    float L;
+    float speed = 100;
+    float rotspeed = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +21,18 @@ public class control2 : MonoBehaviour
     {
         fr = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch).x;
         lr = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch).y;
+        L = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch).x;
         mv.x = fr;
         mv.z = lr;
         transform.Translate(mv * speed * Time.deltaTime);
         if(OVRInput.Get(OVRInput.Button.One, OVRInput.Controller.RTouch))
         {
             transform.position=transform.position + new Vector3(0,-speed*Time.deltaTime,0);
+        }
+        if (Mathf.Abs(L) > 0.1f)
+        {
+            float ro = L * rotspeed * Time.deltaTime;
+            transform.Rotate(0, ro, 0);
         }
     }
 }
